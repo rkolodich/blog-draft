@@ -1,0 +1,28 @@
+.post {
+	&__header {
+		margin-bottom: calc(var(--s-lg) * 2);
+	}
+
+	&__title {
+		margin-bottom: var(--s-sm);
+	}
+
+	&__info {
+		display: flex;
+		align-items: center;
+		gap: var(--s-xs);
+	}
+
+	&__readingtime,
+	&__date {
+		color: var(--c-dim);
+		font: var(--f-body-2);
+		font-weight: normal;
+	}
+
+	&__tags {
+		display: flex;
+		gap: var(--s-xs);
+		font-size: var(--s-body-2);
+	}
+}

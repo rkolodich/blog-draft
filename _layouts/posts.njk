@@ -1,0 +1,18 @@
+{% extends "../_includes/templates/base.njk" %}
+{% import "../_includes/components/post-card.njk" as postCard %}
+
+{% block main %}
+	<div class="container">
+		<div class="posts">
+			<h1 class="posts__title">Посты</h1>
+			{% for data in collections.$postsByYear %}
+				<h2 id="{{ data.year }}" class="posts__year">{{ data.year }}</h2>
+				<ul class="posts__list">
+					{% for post in data.items %}
+						<li>{{ postCard.default(post, { withoutYear: true }) }}</li>
+					{% endfor %}
+				</ul>
+			{% endfor %}
+		</div>
+	</div>
+{% endblock %}

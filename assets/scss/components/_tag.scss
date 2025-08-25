@@ -1,0 +1,10 @@
+.tag {
+	padding: 0.25em;
+	font: var(--f-body-2);
+	line-height: 1;
+	border-radius: var(--bd-radius);
+	background-color: var(--bgc-pane);
+	color: var(--c-text-on-pane);
+	min-width: 5ch;
+	text-align: center;
+}

@@ -1,0 +1,87 @@
+:root {
+	// --- Colors ---
+	// Text colors
+	--c-primary: #00b313;
+	--c-secondary: rgb(67, 165, 106);
+	--c-title: rgb(18, 18, 18);
+	--c-text: rgb(44, 44, 44);
+	--c-dim: rgb(104, 104, 104);
+	--c-border: rgb(230, 230, 230);
+	// Text colors on background
+	--c-text-on-pane: rgb(48, 48, 48);
+	--c-text-on-primary: white;
+	// Background colors
+	--bgc-body: white; // default background color
+	--bgc-pane: rgb(245, 245, 245);
+	--bgc-primary: rgb(212, 212, 212);
+
+	// --- Sizes ---
+	--s-xs: 0.5rem;
+	--s-sm: 0.75rem;
+	--s-md: 1rem;
+	--s-lg: 1.25rem;
+	--s-xl: 1.5rem;
+
+	// --- Fonts ---
+	// Font families
+	--ff-text: "Ubuntu";
+	--ff-code: "Ubuntu Mono";
+	// Font sizes
+	--fs-hero: 3rem;
+	--fs-h1: 2.5rem;
+	--fs-h2: 2rem;
+	--fs-h3: 1.5rem;
+	--fs-body-1: 1.25rem;
+	--fs-body-2: 1rem;
+	--fs-desc: 0.75rem;
+	// Fonts
+	--f-hero: bold var(--fs-hero) var(--ff-text);
+	--f-h1: bold var(--fs-h1) / 1.25 var(--ff-text);
+	--f-h2: bold var(--fs-h2) / 1.25 var(--ff-text);
+	--f-h3: 500 var(--fs-h3) / 1.25 var(--ff-text);
+	--f-body-1: var(--fs-body-1) / 1.5 var(--ff-text);
+	--f-body-2: var(--fs-body-2) / 1.5 var(--ff-text);
+	--f-desc: var(--fs-desc) / 1.15 var(--ff-text);
+
+	// --- Borders ---
+	// Borders
+	--bd-radius: 4px;
+	--bd-weight: 2px;
+	--bd-style: solid;
+	--bd: var(--bd-weight) var(--bd-style) var(--c-border);
+
+	// --- Outline ---
+	--outline: var(--c-secondary) 2px solid;
+	--outline-offset: 2px;
+}
+
+body {
+	font: var(--f-body-1);
+	background-color: var(--bgc-body);
+}
+
+a {
+	color: var(--c-primary);
+}
+
+h1 {
+	font: var(--f-h1);
+}
+
+h2 {
+	font: var(--f-h2);
+}
+
+h3 {
+	font: var(--f-h3);
+}
+
+code {
+	font-family: var(--ff-code);
+}
+
+:focus-visible {
+	outline: var(--outline);
+	outline-offset: var(--outline-offset);
+	border-radius: var(--bd-radius);
+}

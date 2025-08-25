@@ -1,0 +1,41 @@
+<header class="page__header header">
+	<div class="container">
+		<div class="header__container">
+			<a class="logo" href="/">
+				<span class="logo__text">K</span>
+			</a>
+
+			<nav class="header__nav row-nav">
+				<ul class="row-nav__list">
+					<li class="row-nav__item">
+						<a
+							class="row-nav__link"
+							href="/"
+							{{ '/' | ariaCurrentPageAttr | safe }}
+						>
+							Главная
+						</a>
+					</li>
+					<li class="row-nav__item">
+						<a
+							class="row-nav__link"
+							href="/posts"
+							{{ '/posts' | ariaCurrentPageAttr | safe }}
+						>
+							Посты
+						</a>
+					</li>
+					<li class="row-nav__item">
+						<a
+							class="row-nav__link"
+							href="/about"
+							{{ '/about' | ariaCurrentPageAttr | safe }}
+						>
+							Обо мне
+						</a>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+</header>

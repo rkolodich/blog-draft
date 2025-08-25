@@ -1,0 +1,27 @@
+.post-card {
+	position: relative;
+	margin: -0.25em;
+
+	&__box {
+		padding: 0.25em;
+		border-radius: var(--bd-radius);
+	}
+
+	&__title {
+		font: var(--f-body-1);
+		font-weight: normal;
+	}
+
+	&__link {
+		position: absolute;
+		left: 0;
+		top: 0;
+		height: 100%;
+		width: 100%;
+		z-index: 1;
+	}
+
+	&:has(&__link:hover) &__title {
+		text-decoration: underline;
+	}
+}

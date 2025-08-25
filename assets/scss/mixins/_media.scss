@@ -1,0 +1,23 @@
+@mixin animated {
+	@media (prefers-reduced-motion: no-preference) {
+		@content;
+	}
+}
+
+@mixin screen-sm {
+	@media screen and (min-width: 500px) {
+		@content;
+	}
+}
+
+@mixin screen-md {
+	@media screen and (min-width: 900px) {
+		@content;
+	}
+}
+
+@mixin screen-lg {
+	@media screen and (min-width: 1200px) {
+		@content;
+	}
+}

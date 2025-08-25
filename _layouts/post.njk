@@ -1,0 +1,30 @@
+{% extends "../_includes/templates/base.njk" %}
+
+{% block main %}
+	<div class="container post">
+		<header class="post__header">
+			<h1 class="post__title">{{ title }}</h1>
+
+			<div class="post__info post-info">
+				<time
+					class="post-info__date"
+					datetime="{{ post.data.date | toISODate }}"
+				>
+					{{ post.data.date | toDate(options.withoutYear) }}
+				</time>
+				<div class="post-info__dot"></div>
+				<p class="post-info__readingtime">{{ content | readingtime }} мин.</p>
+				{% if tags.length %}
+					<div class="post-info__dot"></div>
+					<div class="post-info__tags">
+						{% for tag in tags %}
+							<div class="post-info__tag tag">{{ tag }}</div>
+						{% endfor %}
+					</div>
+				{% endif %}
+			</div>
+		</header>
+
+		<div class="markdown">{{ content | safe }}</div>
+	</div>
+{% endblock %}

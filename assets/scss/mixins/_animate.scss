@@ -1,0 +1,13 @@
+@use "./media";
+
+@mixin opacity($opacity: 0.66) {
+	opacity: $opacity;
+
+	&:where(:hover, :focus-visible) {
+		opacity: 1;
+	}
+
+	@include media.animated {
+		transition: 0.3s opacity ease;
+	}
+}

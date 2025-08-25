@@ -1,0 +1,17 @@
+{% extends "../_includes/templates/base.njk" %}
+
+{% block main %}
+	<div class="container">
+		<div class="page__intro intro markdown">{{ content | safe }}</div>
+
+		<div class="posts">
+			<h2 class="posts__title">Посты</h2>
+			<div class="posts__list posts__list--fading">
+				{% import "../_includes/components/post-card.njk" as postCard %}
+				{% for post in collections.$posts %}
+					{{ postCard.default(post) }}
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+{% endblock %}

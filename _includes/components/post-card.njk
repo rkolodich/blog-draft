@@ -1,0 +1,31 @@
+{% macro default(post, options) %}
+	{% set heading = 'h' + options.headingLvl if options.headingLvl else 'h3' %}
+	<article class="post-card">
+		<div class="post-card__box">
+			<a class="post-card__link" href="{{ post.page.url | url }}"></a>
+			<header>
+				<{{ heading }} class="post-card__title">{{ post.data.title }}</{{ heading }}>
+			</header>
+			<footer class="post-card__footer post-info">
+				<time
+					class="post-info__date"
+					datetime="{{ post.data.date | toISODate }}"
+				>
+					{{ post.data.date | toDate(options.withoutYear) }}
+				</time>
+				<div class="post-info__dot"></div>
+				<p class="post__readingtime">
+					{{ content if content else '' | readingtime }} мин.
+				</p>
+				{% if post.data.tags.length %}
+					<div class="post-info__dot"></div>
+					<div class="post-info__tags">
+						{% for tag in post.data.tags %}
+							<div class="post-info__tag tag">{{ tag }}</div>
+						{% endfor %}
+					</div>
+				{% endif %}
+			</footer>
+		</div>
+	</article>
+{% endmacro %}

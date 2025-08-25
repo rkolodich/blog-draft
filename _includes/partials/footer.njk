@@ -1,0 +1,35 @@
+<footer class="page__footer footer">
+	<div class="container">
+		<div class="footer__container">
+			<div class="footer__piece">
+				<p>
+					©
+					{% if site.copyright.from == site.copyright.to %}
+						{{ site.copyright.from }}
+					{% else %}
+						{{ site.copyright.from }}
+						– {{ site.copyright.to }}
+					{% endif %}
+				</p>
+				<p>
+					Собран на
+					<a href="{{ site.eleventyLink }}">Eleventy</a>
+					{{ site.buildDate | toDateTime }}
+				</p>
+			</div>
+			<div class="footer__links">
+				<a class="footer__link" href="mailto:{{ about.email }}"> Email </a>
+				<a class="footer__link" href="{{ about.links.github }}" target="_blank">
+					GitHub
+				</a>
+				<a
+					class="footer__link"
+					href="{{ about.links.codepen }}"
+					target="_blank"
+				>
+					CodePen
+				</a>
+			</div>
+		</div>
+	</div>
+</footer>

@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html class="page" lang="{{ site.lang }}" dir="{{ site.dir or 'ltr' }}">
+	<head>
+		{% block head %}
+		{% endblock head %}
+	</head>
+	<body class="page__body">
+		{% block body %}
+			{{ content | safe }}
+		{% endblock body %}
+	</body>
+</html>

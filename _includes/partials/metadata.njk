@@ -1,0 +1,65 @@
+<!-- charset, viewport -->
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<!-- Fonts -->
+<link
+	rel="preload"
+	href="/assets/fonts/Ubuntu/Ubuntu-Regular.woff2"
+	as="font"
+	type="font/woff2"
+/>
+<link
+	rel="preload"
+	href="/assets/fonts/Ubuntu_Mono/UbuntuMono-Regular.woff2"
+	as="font"
+	type="font/woff2"
+/>
+
+<!-- Title, description, author -->
+{% set _title = title + ' | ' + site.shortTitle if title else site.title %}
+{% set _desc = desc if desc else site.desc %}
+<title>{{ _title }}</title>
+<meta name="description" content="{{ _desc }}" />
+
+<!-- CSS -->
+<link
+	rel="stylesheet"
+	href="/assets/css/index.css?t={{ general.builtTimestamp }}"
+/>
+
+<!-- JS -->
+<script src="/assets/js/index.js?t={{ general.builtTimestamp }}"></script>
+
+<!-- Favicon -->
+<link
+	rel="apple-touch-icon"
+	sizes="180x180"
+	href="/assets/favicon/apple-touch-icon.png"
+/>
+<link
+	rel="icon"
+	type="image/png"
+	sizes="32x32"
+	href="/assets/favicon/favicon-32x32.png"
+/>
+<link
+	rel="icon"
+	type="image/png"
+	sizes="16x16"
+	href="/assets/favicon/favicon-16x16.png"
+/>
+
+<!-- Others -->
+{% if site.themeColor %}
+	<meta name="theme-color" content="{{ site.themeColor }}" />
+{% endif %}
+<meta name="robots" content="index,follow" />
+<meta name="generator" content="{{ eleventy.generator }}" />
+<meta name="format-detection" content="telephone=no" />
+<meta name="format-detection" content="address=no" />
+<meta name="build-version" content="{{ site.buildVersion }}" />
+<meta name="build-datetime" content="{{ site.buildISODate }}" />
+{% if site.themeColor %}
+	<meta name="build-hash" content="{{ site.buildHash }}" />
+{% endif %}

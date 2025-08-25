@@ -1,0 +1,9 @@
+# Common
+node_modules
+_site
+.eleventyignore
+
+# Assets
+./assets
+!./assets/scss
+!./assets/js

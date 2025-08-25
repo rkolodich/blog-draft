@@ -1,0 +1,54 @@
+.page {
+	&__body {
+		min-height: 100vh;
+		display: flex;
+		flex-direction: column;
+	}
+
+	&__intro {
+		margin-bottom: calc(var(--s-md) * 2);
+	}
+
+	&__header {
+		position: sticky;
+		top: 0;
+		background-color: var(--bgc-body);
+		z-index: 1;
+
+		&::after {
+			content: "";
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			height: var(--bd-weight);
+			width: 100%;
+			opacity: 1;
+			background-color: var(--c-border);
+
+			@supports (animation-timeline: auto) {
+				opacity: 0;
+				animation: ease-out header-border-bottom both;
+				animation-timeline: scroll();
+				animation-range: 0 100px;
+			}
+		}
+	}
+
+	&__main {
+		flex: 1;
+		padding: calc(var(--s-md) * 2) 0;
+	}
+
+	&__footer {
+		margin-top: auto;
+	}
+}
+
+@keyframes header-border-bottom {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}

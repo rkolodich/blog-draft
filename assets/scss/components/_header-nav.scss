@@ -1,0 +1,29 @@
+@use "../mixins/animate";
+
+.row-nav {
+	display: flex;
+
+	&__list {
+		display: flex;
+		list-style: none;
+		gap: var(--s-xl);
+	}
+
+	&__item {
+		margin: -0.125em;
+	}
+
+	&__link {
+		padding: 0.125em 0.25em;
+		border-radius: var(--bd-radius);
+		font: var(--f-body-1);
+		@include animate.opacity;
+
+		&[aria-current="page"] {
+			opacity: 1;
+			text-decoration: none;
+			background-color: var(--c-primary);
+			color: var(--c-text-on-primary);
+		}
+	}
+}

@@ -1,0 +1,18 @@
+{% extends "./empty.njk" %}
+
+{% block head %}
+	{% include "../partials/metadata.njk" %}
+{% endblock %}
+
+{% block body %}
+	{% include "../partials/skip-to-main.njk" %}
+	{% include "../partials/header.njk" %}
+
+	<main id="main" class="page__main">
+		{% block main %}
+			{{ content | safe }}
+		{% endblock main %}
+	</main>
+
+	{% include "../partials/footer.njk" %}
+{% endblock %}

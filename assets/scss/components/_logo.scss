@@ -1,0 +1,29 @@
+@use "../mixins/media";
+
+.logo {
+	--p: 0.125em;
+	--bgc: var(--c-primary);
+	--c: var(--c-text-on-primary);
+	display: inline-block;
+	position: relative;
+	font-size: 2rem;
+	user-select: none;
+	text-decoration: none;
+	line-height: 1;
+	background-color: var(--bgc);
+	color: var(--c);
+	padding: var(--p);
+	min-height: calc(1em + var(--p) * 2);
+	min-width: calc(1em + var(--p) * 2);
+	border-radius: var(--bd-radius);
+
+	&:where(:hover, :focus-visible) {
+		text-shadow:
+			1px 1px 0 var(--bgc),
+			2px 2px 0 var(--c);
+	}
+
+	@include media.animated {
+		transition: 0.3s ease text-shadow;
+	}
+}

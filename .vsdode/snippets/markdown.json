@@ -1,0 +1,11 @@
+{
+	"jsconfig.json": {
+		"prefix": "fm:post",
+		"body": [
+			"---",
+			"title: ",
+			"date: $CURRENT_YEAR-$CURRENT_MONTH-$CURRENT_DATE",
+			"---"
+		]
+	}
+}

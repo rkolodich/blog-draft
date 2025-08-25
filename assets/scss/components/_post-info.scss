@@ -1,0 +1,27 @@
+.post-info {
+	display: flex;
+	align-items: center;
+	gap: var(--s-sm);
+
+	&__dot {
+		display: block;
+		height: 0.5rem;
+		width: 0.5rem;
+		background-color: var(--c-dim);
+		border-radius: 50%;
+		opacity: 0.25;
+	}
+
+	&__readingtime,
+	&__date {
+		color: var(--c-dim);
+		font: var(--f-body-2);
+		font-weight: normal;
+	}
+
+	&__tags {
+		display: flex;
+		gap: var(--s-xs);
+		font-size: var(--s-body-2);
+	}
+}
