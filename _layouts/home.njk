@@ -15,12 +15,24 @@
 				</p>
 			</div>
 
+			{% set posts = collections.$posts %}
+			{% set shownPosts = 5 %}
+
 			<div class="posts__list posts__list--fading">
 				{% import "../_includes/components/post-card.njk" as postCard %}
-				{% for post in collections.$posts %}
+				{% for post in posts.slice(0, shownPosts) %}
 					{{ postCard.default(post) }}
 				{% endfor %}
 			</div>
+
+			{% if posts.length > shownPosts %}
+				<a
+					class="posts__more"
+					href="/posts"
+				>
+					Все <span aria-hidden="true">»</span>
+				</a>
+			{% endif %}
 		</div>
 	</div>
 {% endblock %}
