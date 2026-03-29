@@ -28,6 +28,41 @@ Blog site based on Eleventy
 
 ## TODO
 
+### General:
+
+### Must have
+
+- [ ] Fix padding issue when scrolling
+- [ ] Use (CSS mixins)[https://github.com/postcss/postcss-mixins]
+- [ ] Remove SCSS
+
+Home page:
+
+- [ ] Post counter
+- [ ] “Read more” button
+- [ ] Update Hero
+
+About Me page:
+
+- [ ] Create
+- [ ] General info
+- [ ] Career information
+
+Languages:
+
+- [ ] Plan support for other languages in the future
+
+### Nice to have
+
+Design:
+
 - [ ] Light/dark theme switcher
-- [ ] RRS
 - [ ] TOC
+
+Optimization:
+
+- [ ] Speculation rules
+
+SEO:
+
+- [ ] RSS (looks like “RRS” was a typo)
