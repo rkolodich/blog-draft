@@ -38,19 +38,13 @@ Blog site based on Eleventy
 
 Home page:
 
-- [ ] Post counter
-- [ ] “Read more” button
+- [x] Post counter
+- [x] “Read more” button
 - [ ] Update Hero
-
-About Me page:
-
-- [ ] Create
-- [ ] General info
-- [ ] Career information
 
 Languages:
 
-- [ ] Plan support for other languages in the future
+- [x] Plan support for other languages in the future
 
 ### Nice to have
 
