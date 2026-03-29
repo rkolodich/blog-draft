@@ -1,6 +1,14 @@
 .posts {
-	&__title {
+	&__header {
+		display: flex;
+		align-items: baseline;
 		margin-bottom: 1rem;
+		gap: var(--s-xs);
+	}
+
+	&__count {
+		color: var(--c-dim);
+		font: var(--fs-body-2);
 	}
 
 	&__year {

@@ -5,7 +5,17 @@
 		<div class="page__intro intro markdown">{{ content | safe }}</div>
 
 		<div class="posts">
-			<h2 class="posts__title">Посты</h2>
+			<div class="posts">
+				<div class="posts__header">
+					<h2>Посты</h2>
+					<p
+						class="posts__count"
+						aria-label="Всего постов {{ collections.$posts.length }}"
+					>
+						{{ collections.$posts.length }}
+					</p>
+				</div>
+			</div>
 			<div class="posts__list posts__list--fading">
 				{% import "../_includes/components/post-card.njk" as postCard %}
 				{% for post in collections.$posts %}
