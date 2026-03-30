@@ -38,20 +38,12 @@ jobs:
       #   with:
       #     key: ${{ secrets.SSH_PRIVATE_KEY }}
 
-      # - name: Deploy with rsync
-
-      - name: Ensure target directory exists
-        run: |
-          ssh -p "${{ secrets.SSH_PORT }}" \
-            "${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}" \
-            "mkdir -p '${{ vars.DEPLOY_PATH }}'"
-
       - name: rsync deployments
         uses: burnett01/rsync-deployments@v8
         with:
           switches: -avzr --delete
           path: ./_site/
-          remote_path: ${{ vars.DEPLOY_PATH }} # ex: /var/www/html/
+          remote_path: "mkdir -p ${{ vars.REMOTE_PATH }} && rsync" # ex: /var/www/html/
           remote_host: ${{ secrets.SSH_HOST }} # ex: example.com
           remote_port: ${{ secrets.SSH_PORT }} # ex: 22
           remote_user: ${{ secrets.SSH_USER }} # ex: ubuntu
