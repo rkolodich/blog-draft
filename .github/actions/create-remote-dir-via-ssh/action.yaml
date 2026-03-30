@@ -1,0 +1,26 @@
+name: Create remote directory
+description: Create a directory on a remote server via SSH (mkdir -p)
+
+inputs:
+  host:
+    description: SSH host (IP or domain)
+    required: true
+  port:
+    description: SSH port
+    required: true
+  user:
+    description: SSH user
+    required: true
+  path:
+    description: Remote directory path to create
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - name: Create directory via SSH
+      shell: bash
+      run: |
+        ssh -p "${{ inputs.port }}" \
+          "${{ inputs.user }}@${{ inputs.host }}" \
+          "mkdir -p '${{ inputs.path }}'"
