@@ -1,36 +1,51 @@
 name: Deploy blog
 
 on:
-    push:
-        branches:
-            - main
+  push:
+    branches:
+      - main
 
 permissions:
-    contents: read
+  contents: read
 
 jobs:
-    build-and-deploy:
-        runs-on: ubuntu-latest
+  build-and-deploy:
+    runs-on: ubuntu-latest
 
-        steps:
-            - name: Checkout repository
-              uses: actions/checkout@v4
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-            - name: Setup Node.js
-              uses: actions/setup-node@v4
-              with:
-                  node-version: 22
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
 
-            - name: Install pnpm
-              uses: pnpm/action-setup@v5
-              with:
-                  cache: true
+      - name: Install pnpm
+        uses: pnpm/action-setup@v5
+        with:
+          cache: true
 
-            - name: Install dependencies
-              run: pnpm install
+      - name: Install dependencies
+        run: pnpm install
 
-            - name: Build project
-              run: npm run build
+      - name: Build project
+        run: npm run build
 
-            - name: Done
-              run: echo Done
+      # - name: Install SSH Key
+      #   uses: shimataro/ssh-key-action@v2
+      #   with:
+      #     key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      # - name: Deploy with rsync
+
+      - name: rsync deployments
+        uses: burnett01/rsync-deployments@v8
+        with:
+          switches: -avzr --delete
+          path: ./_site/
+          remote_path: ${{ secrets.DEPLOY_PATH }} # ex: /var/www/html/
+          remote_host: ${{ secrets.SSH_HOST }} # ex: example.com
+          remote_port: ${{ secrets.SSH_PORT }} # ex: 22
+          remote_user: ${{ secrets.SSH_USER }} # ex: ubuntu
+          remote_key: ${{ secrets.SSH_PRIVATE_KEY }}
