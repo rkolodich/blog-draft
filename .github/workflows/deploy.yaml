@@ -40,6 +40,12 @@ jobs:
 
       # - name: Deploy with rsync
 
+      - name: Ensure target directory exists
+        run: |
+          ssh -p "${{ secrets.SSH_PORT }}" \
+            "${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}" \
+            "mkdir -p '${{ vars.DEPLOY_PATH }}'"
+
       - name: rsync deployments
         uses: burnett01/rsync-deployments@v8
         with:
