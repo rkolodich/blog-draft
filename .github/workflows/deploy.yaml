@@ -33,11 +33,6 @@ jobs:
       - name: Build project
         run: npm run build
 
-      # - name: Install SSH Key
-      #   uses: shimataro/ssh-key-action@v2
-      #   with:
-      #     key: ${{ secrets.SSH_PRIVATE_KEY }}
-
       - name: Install SSH key
         uses: shimataro/ssh-key-action@v2
         with:
@@ -56,14 +51,3 @@ jobs:
           rsync -r -e "ssh -p ${{ secrets.SSH_PORT }}" \
           ./_site/ \
           ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ vars.DEPLOY_PATH }}
-
-      # - name: rsync deployments
-      #   uses: burnett01/rsync-deployments@v8
-      #   with:
-      #     switches: -avzr --delete
-      #     path: ./_site/
-      #     remote_path: ${{ vars.DEPLOY_PATH }} # ex: /var/www/html/
-      #     remote_host: ${{ secrets.SSH_HOST }} # ex: example.com
-      #     remote_port: ${{ secrets.SSH_PORT }} # ex: 22
-      #     remote_user: ${{ secrets.SSH_USER }} # ex: ubuntu
-      #     remote_key: ${{ secrets.SSH_PRIVATE_KEY }}
