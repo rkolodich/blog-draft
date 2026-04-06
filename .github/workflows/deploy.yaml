@@ -45,8 +45,17 @@ jobs:
           known_hosts: ${{ secrets.SSH_KNOWN_HOSTS }}
           if_key_exists: fail
 
+      - name: Create remote directory
+        run: |
+          ssh -p "${{ secrets.SSH_PORT }}" \
+          "${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}" \
+          "mkdir -p '${{ vars.DEPLOY_PATH }}'"
+
       - name: rsync over SSH
-        run: rsync -r ./_site/ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ vars.DEPLOY_PATH }}
+        run: |
+          rsync -r -e "ssh -p ${{ secrets.SSH_PORT }}" \
+          ./_site/ \
+          ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ vars.DEPLOY_PATH }}
 
       # - name: rsync deployments
       #   uses: burnett01/rsync-deployments@v8
