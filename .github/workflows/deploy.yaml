@@ -39,17 +39,12 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           known_hosts: ${{ secrets.SSH_KNOWN_HOSTS }}
           if_key_exists: fail
-
-      - name: Create remote directory
-        uses: ./.github/actions/create-remote-dir-via-ssh
+      - name: Upload files
+        uses: ./.github/actions/rsync-over-ssh
         with:
-          host: ${{ secrets.SSH_HOST }}
-          port: ${{ secrets.SSH_PORT }}
-          user: ${{ secrets.SSH_USER }}
-          path: ${{ vars.DEPLOY_PATH }}
-
-      - name: rsync over SSH
-        run: |
-          rsync -r -e "ssh -p ${{ secrets.SSH_PORT }}" \
-          ./_site/ \
-          ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ vars.DEPLOY_PATH }}
+          ssh_host: ${{ secrets.SSH_HOST }}
+          ssh_port: ${{ secrets.SSH_PORT }}
+          ssh_user: ${{ secrets.SSH_USER }}
+          source_path: ./site
+          target_path: ${{ vars.DEPLOY_PATH }}
+          create_dir: true
