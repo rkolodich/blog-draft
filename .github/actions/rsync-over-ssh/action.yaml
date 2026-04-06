@@ -17,16 +17,11 @@ inputs:
   target_path:
     description: Remote directory path to create
     required: true
-  create_dir:
-    description: "Create remote directory"
-    required: true
-    default: "false"
 
 runs:
   using: "composite"
   steps:
     - name: Create directory via SSH
-      if: ${{ inputs.create_dir == 'true' }}
       shell: bash
       run: |
         ssh -p "${{ inputs.ssh_port }}" \

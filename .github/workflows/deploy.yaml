@@ -47,4 +47,3 @@ jobs:
           ssh_user: ${{ secrets.SSH_USER }}
           source_path: ./site
           target_path: ${{ vars.DEPLOY_PATH }}
-          create_dir: true
