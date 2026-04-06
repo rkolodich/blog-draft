@@ -45,14 +45,6 @@ jobs:
           known_hosts: ${{ secrets.SSH_KNOWN_HOSTS }}
           if_key_exists: fail
 
-      - name: Create remote directory
-        uses: ./.github/actions/create-remote-dir-via-ssh
-        with:
-          host: ${{ secrets.SSH_HOST }}
-          port: ${{ secrets.SSH_PORT }}
-          user: ${{ secrets.SSH_USER }}
-          path: ${{ vars.DEPLOY_PATH }}
-
       - name: rsync over SSH
         run: rsync -r ./_site/ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ vars.DEPLOY_PATH }}
 
