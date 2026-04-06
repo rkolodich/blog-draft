@@ -26,7 +26,7 @@ runs:
   using: "composite"
   steps:
     - name: Create directory via SSH
-      if: ${{ inputs.create_remote_dir == 'true' }}
+      if: ${{ inputs.create_dir == 'true' }}
       shell: bash
       run: |
         ssh -p "${{ inputs.port }}" \
