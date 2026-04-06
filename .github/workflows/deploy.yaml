@@ -41,10 +41,12 @@ jobs:
           if_key_exists: fail
 
       - name: Create remote directory
-        run: |
-          ssh -p "${{ secrets.SSH_PORT }}" \
-          "${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}" \
-          "mkdir -p '${{ vars.DEPLOY_PATH }}'"
+        uses: ./.github/actions/create-remote-dir-via-ssh
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          port: ${{ secrets.SSH_PORT }}
+          user: ${{ secrets.SSH_USER }}
+          path: ${{ vars.DEPLOY_PATH }}
 
       - name: rsync over SSH
         run: |
