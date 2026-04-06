@@ -45,5 +45,5 @@ jobs:
           ssh_host: ${{ secrets.SSH_HOST }}
           ssh_port: ${{ secrets.SSH_PORT }}
           ssh_user: ${{ secrets.SSH_USER }}
-          source_path: ./site
+          source_path: ./_site
           target_path: ${{ vars.DEPLOY_PATH }}
