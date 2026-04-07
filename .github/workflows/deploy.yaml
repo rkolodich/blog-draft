@@ -8,6 +8,9 @@ on:
 permissions:
   contents: read
 
+env:
+  DOMAIN: ${{ vars.DOMAIN }}
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
@@ -39,6 +42,7 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           known_hosts: ${{ secrets.SSH_KNOWN_HOSTS }}
           if_key_exists: fail
+
       - name: Upload files
         uses: ./.github/actions/rsync-over-ssh
         with:
@@ -47,3 +51,43 @@ jobs:
           ssh_user: ${{ secrets.SSH_USER }}
           source_path: ./_site
           target_path: ${{ vars.DEPLOY_PATH }}
+
+  render-nginx-config:
+    runs-on: ubuntu-latest
+    environment: dev
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Render nginx config from template
+        run: |
+          mkdir -p .deploy
+          envsubst < deploy/nginx/site.conf.template > .deploy/${DOMAIN}.conf
+
+      - name: Show generated config
+        run: |
+          cat .deploy/${DOMAIN}.conf
+
+      - name: Install SSH key
+        uses: shimataro/ssh-key-action@v2
+        with:
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          known_hosts: ${{ secrets.SSH_KNOWN_HOSTS }}
+          if_key_exists: fail
+
+      - name: Upload config
+        uses: ./.github/actions/rsync-over-ssh
+        with:
+          ssh_host: ${{ secrets.SSH_HOST }}
+          ssh_port: ${{ secrets.SSH_PORT }}
+          ssh_user: ${{ secrets.SSH_USER }}
+          source_path: .deploy/${{vars.DOMAIN}}.conf
+          target_path: /etc/nginx/sites-available/
+
+      - name: Reload nginx
+        run: |
+          ssh -p "${{ secrets.SSH_PORT }}" \
+            "${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}" \
+             sudo nginx -t && \
+             sudo systemctl reload nginx"
