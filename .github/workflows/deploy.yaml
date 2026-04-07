@@ -63,11 +63,11 @@ jobs:
       - name: Render nginx config from template
         run: |
           mkdir -p .deploy
-          envsubst < ./nginx.conf > .deploy/${DOMAIN}.conf
+          envsubst < ./nginx.conf > ./deploy/nginx/${DOMAIN}
 
       - name: Show generated config
         run: |
-          cat .deploy/${DOMAIN}.conf
+          cat ./deploy/nginx/${DOMAIN}
 
       - name: Install SSH key
         uses: shimataro/ssh-key-action@v2
@@ -82,7 +82,7 @@ jobs:
           ssh_host: ${{ secrets.SSH_HOST }}
           ssh_port: ${{ secrets.SSH_PORT }}
           ssh_user: ${{ secrets.SSH_USER }}
-          source_path: .deploy/${{vars.DOMAIN}}.conf
+          source_path: ./deploy/nginx/${DOMAIN}
           target_path: /etc/nginx/sites-available/
 
       - name: Reload nginx
