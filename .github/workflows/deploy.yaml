@@ -88,6 +88,6 @@ jobs:
       - name: Reload nginx
         run: |
           ssh -p "${{ secrets.SSH_PORT }}" \
-            "${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}" \
+            "${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}" && \
              sudo nginx -t && \
              sudo systemctl reload nginx"
