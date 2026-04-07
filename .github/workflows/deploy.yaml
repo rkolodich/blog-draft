@@ -9,6 +9,7 @@ permissions:
   contents: read
 
 env:
+  DEPLOY_PATH: ${{ vars.DEPLOY_PATH }}
   DOMAIN: ${{ vars.DOMAIN }}
 
 jobs:
