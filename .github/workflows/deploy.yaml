@@ -64,7 +64,7 @@ jobs:
       - name: Render nginx config from template
         run: |
           mkdir -p ./deploy/nginx
-          envsubst < ./nginx.conf > ./deploy/nginx/${DOMAIN}
+          envsubst '${DOMAIN} ${DEPLOY_PATH}' < ./nginx.conf > ./deploy/nginx/${DOMAIN}
 
       - name: Show generated config
         run: |
