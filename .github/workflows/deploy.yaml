@@ -13,9 +13,23 @@ env:
   DOMAIN: ${{ vars.DOMAIN }}
 
 jobs:
+  install-ssh:
+    runs-on: ubuntu-latest
+    environment: dev
+    steps:
+      - name: Install SSH key
+        uses: shimataro/ssh-key-action@v2
+        with:
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          known_hosts: ${{ secrets.SSH_KNOWN_HOSTS }}
+          if_key_exists: fail
+
   build-and-deploy:
     runs-on: ubuntu-latest
     environment: dev
+
+    needs:
+      - install-ssh
 
     steps:
       - name: Checkout repository
@@ -37,13 +51,6 @@ jobs:
       - name: Build project
         run: npm run build
 
-      - name: Install SSH key
-        uses: shimataro/ssh-key-action@v2
-        with:
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          known_hosts: ${{ secrets.SSH_KNOWN_HOSTS }}
-          if_key_exists: fail
-
       - name: Upload files
         uses: ./.github/actions/rsync-over-ssh
         with:
@@ -57,6 +64,9 @@ jobs:
     runs-on: ubuntu-latest
     environment: dev
 
+    needs:
+      - install-ssh
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -69,13 +79,6 @@ jobs:
       - name: Show generated config
         run: |
           cat ./deploy/nginx/${DOMAIN}
-
-      - name: Install SSH key
-        uses: shimataro/ssh-key-action@v2
-        with:
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          known_hosts: ${{ secrets.SSH_KNOWN_HOSTS }}
-          if_key_exists: fail
 
       - name: Upload config
         uses: ./.github/actions/rsync-over-ssh
@@ -93,9 +96,10 @@ jobs:
              sudo ln -s /etc/nginx/sites-available/${{ vars.DOMAIN }} /etc/nginx/sites-enabled/${{ vars.DOMAIN }}
 
   nginx-reload:
-    name: Validate and reload nginx
     runs-on: ubuntu-latest
+    environment: dev
     needs:
+      - install-ssh
       - build-and-deploy
       - render-nginx-config
 
