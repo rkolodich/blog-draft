@@ -24,7 +24,7 @@ jobs:
           known_hosts: ${{ secrets.SSH_KNOWN_HOSTS }}
           if_key_exists: fail
 
-  build-and-deploy:
+  build-and-deploy-site:
     runs-on: ubuntu-latest
     environment: dev
 
@@ -60,7 +60,7 @@ jobs:
           source_path: ./_site/
           target_path: ${{ vars.DEPLOY_PATH }}
 
-  render-nginx-config:
+  render-and-deploy-nginx-config:
     runs-on: ubuntu-latest
     environment: dev
 
@@ -95,22 +95,15 @@ jobs:
             "${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}" && \
              sudo ln -s /etc/nginx/sites-available/${{ vars.DOMAIN }} /etc/nginx/sites-enabled/${{ vars.DOMAIN }}
 
-  nginx-reload:
+  reload-nginx:
     runs-on: ubuntu-latest
     environment: dev
     needs:
       - install-ssh
-      - build-and-deploy
-      - render-nginx-config
+      - build-and-deploy-site
+      - render-and-deploy-nginx-config
 
     steps:
-      - name: Install SSH key
-        uses: shimataro/ssh-key-action@v2
-        with:
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          known_hosts: ${{ secrets.SSH_KNOWN_HOSTS }}
-          if_key_exists: fail
-
       - name: Validate and reload nginx
         run: |
           ssh -p "${{ secrets.SSH_PORT }}" \
