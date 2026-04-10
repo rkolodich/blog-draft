@@ -91,3 +91,39 @@ jobs:
           ssh -p "${{ secrets.SSH_PORT }}" \
             "${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}" && \
              sudo ln -s /etc/nginx/sites-available/${{ vars.DOMAIN }} /etc/nginx/sites-enabled/${{ vars.DOMAIN }}
+
+  nginx-reload:
+    name: Validate and reload nginx
+    runs-on: ubuntu-latest
+    needs:
+      - build-and-deploy
+      - render-nginx-config
+
+    steps:
+      - name: Install SSH key
+        uses: shimataro/ssh-key-action@v2
+        with:
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          known_hosts: ${{ secrets.SSH_KNOWN_HOSTS }}
+          if_key_exists: fail
+
+      - name: Validate and reload nginx
+        run: |
+          ssh -p "${{ secrets.SSH_PORT }}" \
+            "${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}" << 'EOF'
+            set -e
+
+            echo "🔍 Checking nginx config..."
+            sudo nginx -t
+
+            echo "🚀 Starting or reloading nginx..."
+
+            if systemctl is-active --quiet nginx; then
+              sudo systemctl reload nginx
+              echo "♻️ nginx reloaded"
+            else
+              sudo systemctl enable nginx
+              sudo systemctl start nginx
+              echo "▶️ nginx started"
+            fi
+          EOF
