@@ -32,7 +32,6 @@ Blog site based on Eleventy
 
 ### Must have
 
-- [ ] Fix padding issue when scrolling
 - [ ] Use (CSS mixins)[https://github.com/postcss/postcss-mixins]
 - [ ] Remove SCSS
 
