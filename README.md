@@ -54,7 +54,7 @@ Design:
 
 Optimization:
 
-- [ ] Speculation rules
+- [x] Speculation rules
 
 SEO:
 
