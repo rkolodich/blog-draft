@@ -18,6 +18,8 @@
 	"packageManager": "pnpm@10.6.2",
 	"devDependencies": {
 		"@11ty/eleventy": "^3.1.0",
+		"@11ty/eleventy-plugin-directory-output": "^1.0.2",
+		"@quasibit/eleventy-plugin-sitemap": "^2.2.0",
 		"autoprefixer": "^10.4.21",
 		"cross-env": "^7.0.3",
 		"esbuild": "^0.25.5",
