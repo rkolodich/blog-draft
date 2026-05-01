@@ -3,7 +3,7 @@ import readingtime from "@myxotod/eleventy-plugin-readingtime";
 import sitemap from "@quasibit/eleventy-plugin-sitemap";
 import dirOutput from "@11ty/eleventy-plugin-directory-output";
 
-import { DOMAIN } from "../../_share/const.js";
+import { URL } from "../../_share/const.js";
 
 /** @param {import("@11ty/eleventy").UserConfig} eleventyConfig */
 export function registerPlugins(eleventyConfig) {
@@ -24,7 +24,7 @@ export function registerPlugins(eleventyConfig) {
 	eleventyConfig.addPlugin(sitemap, {
 		lastModifiedProperty: "modified",
 		sitemap: {
-			hostname: DOMAIN,
+			hostname: URL,
 		},
 	});
 

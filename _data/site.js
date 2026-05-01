@@ -1,4 +1,5 @@
 import childProcess from "node:child_process";
+import { URL } from "../_share/const.js";
 
 const buildDate = new Date();
 const buildISODate = buildDate.toISOString();
@@ -31,6 +32,8 @@ export default {
 	buildTimestamp,
 	buildVersion,
 	buildHash,
+
+	url: URL,
 
 	title: "Блог",
 	shortTitle: "Блог",
