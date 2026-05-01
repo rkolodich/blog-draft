@@ -7,6 +7,7 @@ import {
 	registerTransforms,
 } from "./_11ty/index.js";
 import fg from "fast-glob";
+import { DEV_PORT } from "./_share/const.js";
 
 /** @param {import("@11ty/eleventy").UserConfig} eleventyConfig */
 export default function (eleventyConfig) {
@@ -33,6 +34,11 @@ export default function (eleventyConfig) {
 
 		return (data) =>
 			`${correct(data.page.filePathStem)}.${data.page.outputFileExtension}`;
+	});
+
+	// Set custom ports
+	eleventyConfig.setServerOptions({
+		port: DEV_PORT,
 	});
 
 	// Register eleventy needed configs
